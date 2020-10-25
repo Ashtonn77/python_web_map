@@ -25,5 +25,8 @@ for i, j, k in zip(lat, lon, elev):
     fg.add_child(folium.Marker(
         location=[i, j], popup=str(k) + 'm', icon=folium.Icon(color=color_picker(k))))
 
+fg.add_child(folium.GeoJson(
+    data=(open('world.json', 'r', encoding='utf-8-sig').read())))
+
 map.add_child(fg)
 map.save("map_prac.html")
