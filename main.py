@@ -26,7 +26,8 @@ for i, j, k in zip(lat, lon, elev):
         location=[i, j], popup=str(k) + 'm', icon=folium.Icon(color=color_picker(k))))
 
 fg.add_child(folium.GeoJson(
-    data=(open('world.json', 'r', encoding='utf-8-sig').read())))
+    data=open('world.json', 'r', encoding='utf-8-sig').read(), style_function=lambda x: {'fillColor': 'yellow' if x['properties']['POP2005'] < 10000000 else 'green' if x['properties']['POP2005'] < 20000000 else 'blue'}))
 
 map.add_child(fg)
+map.add_child(folium.LayerControl())
 map.save("map_prac.html")
